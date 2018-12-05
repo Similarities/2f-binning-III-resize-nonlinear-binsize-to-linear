@@ -6,7 +6,8 @@ y(i) is then the corresponding value in y (correct: y(x))
 
 Resampling - resizing binsizes means: 
 x-axis has a ascending nonlinear scaling in the binsizes (non equidistant 
-distances between neighboured datapoints, e.g. 1/x dependency, non constant sampling frequency, x(i+1)-x(i)>0 but NOT constant for all i) that should result in aequidistant (constant) binsizes. Compared to the biggest distance (maximum binsize) in the dataset, the smaller distances between all the other neighbored datapoints can be summarized, joined to a bigger binsize. That is called resampling, downsampling. Accordingly, the dependend y(x)-values have to be redistributet (e.g. summed). Usually the new binsize is not a integer multiple of the smaller binsizes, an overhang or rest results and hence, a redistribution (splitting) of (y(x)) to the according new binsize has to be implemented in order to preserve the overall value of the y-entries.
+distances between neighboured datapoints, e.g. 1/x dependency, non constant sampling frequency, x(i+1)-x(i)>0 but NOT constant for all i) that should result in aequidistant (constant) binsizes. Compared to a bigger binsize, some neighbored datapoints can be summarized/ joined to a bigger binsize, which of course reduces the datapoints of the dataset.
+This is called resampling, downsampling. Accordingly, the dependend y(x)-values have to be redistributet (e.g. summed). Usually the new binsize is not a integer multiple of the smaller binsizes, an overhang or rest results and hence, a redistribution (splitting) of (y(x)) to the according new binsize has to be implemented in order to preserve the overall value of the y-entries.
 
 Note: this method linearizes nonlinear one axis of an 2D array, by downsampling it to a new samplingrate that has to be 1.5 times bigger than maximum binsize in the dataset. This method is NOT oversampling the dataset, it is NOT creating a smaller binsizes - something like this could be done using the 2f-binning II module which provides a linear interpolation for aequidistant datapoints. 
 
@@ -39,5 +40,5 @@ For iteration j=0, x*(0) = 1.5 with rest_x=0.6, the corresponding y*(0)=1+100+23
 
 Notes: python(x,y) 2.7x, numpy, tk dialog. saves .txt file
 The programm asks for a two coloumn data set (.txt file, first coloumn x, second coloumn y, decimal with ".", separation " ", sorted, first 3 rows are skipped). the resulting sampling frequency in this programm has to be bigger than 1.5 times the maximum 
-binsize of the dataset (otherwise the programm would have to interpolate by dividing a given separation into new bins). 
+binsize of the dataset (avoiding alias effects or subdivisions of bins). 
 Needs cleaning and further testing. 
