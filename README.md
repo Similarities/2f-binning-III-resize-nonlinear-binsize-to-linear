@@ -27,12 +27,15 @@ is reached at x(2)= 2.1 and find 0.6 as an overhang (rest_x(0) in x*(0)).
 Now, this overhang has to be distributet to the followed bin (new bins iterate with j, old ones with i).
 and very important: the overhang ratio of the linked y*(x*(0)) is called rest_y has to be resorted to the y-value of the  x*(1)-bin, by substracting the corresponding amount from the previous y*(x*(0)).
 
-i.a.w. 
-rest_x(j) = x*(j)-binsize;
-rest_y(j) = y*(j)(rest_x(j)/binsize);
-j+1;
+i.a.w.
 
-For iteration j=0, x*(0)=1.5 with rest_x=0.6, the corresponding y*(0)=1+100+234-rest_y=335-rest_y, where rest_y=335*(0.6/1.5)=134 and this has to be added to the new y(j+1)* value. Note: this approach summarizes the rest_values in y relating to the whole new binsize. One could change this to a method, which weights a single overhang bin (e.g. y(2)=234 in our example above), in this case rest_y=y(i)*[rest_x/(x(i)-x(i-1))]=234(0.6/0.7)=200.57 - which makes in some sensitive cases a difference.
+rest_x(j) = x*(j)-binsize
+
+rest_y(j) = y*(j)(rest_x(j)/binsize)
+
+j+1
+
+For iteration j=0, x*(0) = 1.5 with rest_x=0.6, the corresponding y*(0)=1+100+234-rest_y=335-rest_y, where rest_y = 335* (0.6/1.5) = 134 and this has to be added to the new y(j+1)* value. Note: this approach summarizes the rest_values in y relating to the whole new binsize. One could change this to a method, which weights a single overhang bin (e.g. y(2)=234 in our example above), in this case rest_y=y(i)* [rest_x/(x(i)-x(i-1))] = 234* (0.6/0.7) = 200.57 - which makes in some sensitive cases a difference.
 
 Notes: python(x,y) 2.7x, numpy, tk dialog. saves .txt file
 The programm asks for a two coloumn data set (.txt file, first coloumn x, second coloumn y, decimal with ".", separation " ", sorted, first 3 rows are skipped). the resulting sampling frequency in this programm has to be bigger than 1.5 time the maximum 
