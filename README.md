@@ -15,14 +15,8 @@ Example:
 
 original dataset:
 
-x      y   i
-0.9   1.0  0
-1.4   100  1
-2.1   234  2
-2.9   110  3
-...
-3.9   3
-
+x =(0.9, 1.4, 2.1, 2.9,...);
+y=(1.0, 100, 234,119,...) ;
 
 the new binsize (sampling frequency) is e.g.:
 binsize = 1.5
@@ -33,9 +27,9 @@ Now, this overhang has to be distributet to the followed bin (new bins iterate w
 and very important: the overhang ratio of the linked y*(x*(0)) is called rest_y has to be resorted to the y-value of the  x*(1)-bin, by substracting the corresponding amount from the previous y*(x*(0)).
 
 i.a.w. 
-rest_x(j) = x*(j)-binsize
-rest_y(j) = y*(j)(rest_x(j)/binsize)
-j+1
+rest_x(j) = x*(j)-binsize;
+rest_y(j) = y*(j)(rest_x(j)/binsize);
+j+1;
 
 For iteration j=0, x*(0)=1.5 with rest_x=0.6, the corresponding y*(0)=1+100+234-rest_y=335-rest_y, where rest_y=335*0.6/1.5=134 and this has to be added to the new y(j+1)* value. Note: this approach summarizes the rest_values in y relating to the whole new binsize. One could change this to a method, which weights a single overhang bin (e.g. y(2)=234 in our example above), in this case rest_y=y(i)*[rest_x/(x(i)-x(i-1))]=234*0.6/0.7=200.57 - which makes in some sensitive cases a difference.
 
