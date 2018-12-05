@@ -128,7 +128,8 @@ def shrink_subarray(matrix,i,increment):
             restx = old-matrix[i,0]
             rest2=(restx/increment)*matrix[i,1]
             #print "rest 2 x und y", restx, rest2
-            matrix[i,1]=(1-restx)*matrix[i,1]
+            #matrix[i,1]=(1-restx)*matrix[i,1]
+            matrix[i,1]=matrix[i,1]-rest2
             matrix[i+1,1]=matrix[i+1,1]+rest2
             matrix[i+1,0]=matrix[i+1,0]+restx
             #print "corrected bin point i+1", matrix[i+1]
